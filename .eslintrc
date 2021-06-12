@@ -39,7 +39,7 @@
 		"max-len": [
 			"warn",
 			{
-				"code": 80,
+				"code": 100,
 				"ignoreStrings": true,
 				"ignoreTemplateLiterals": true,
 				"ignoreComments": true
@@ -85,7 +85,11 @@
 		],
 		"no-console": 0,
 		"no-await-in-loop": 0,
-		"no-param-reassign": 0
+		"no-param-reassign": 0,
+		"quotes": [
+			"warn",
+			"single"
+		]
 	},
 	"settings": {
 		"react": {

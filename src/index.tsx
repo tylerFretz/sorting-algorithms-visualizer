@@ -1,11 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import CssBaseLine from '@material-ui/core/CssBaseline';
+import { ThemeProvider } from '@material-ui/core/styles';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ContextProvider from './ContextProvider';
+import theme from './theme';
 
 ReactDOM.render(
 	<React.StrictMode>
-		<App />
+		<ThemeProvider theme={theme}>
+			<ContextProvider>
+				<CssBaseLine />
+				<App />
+			</ContextProvider>
+		</ThemeProvider>
 	</React.StrictMode>,
 	document.getElementById('root')
 );

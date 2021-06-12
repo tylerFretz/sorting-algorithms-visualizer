@@ -1,8 +1,21 @@
-export type ColourOptions = 0 | 1 | 2 | 3;
+export interface Bar {
+	colorCode: ColorHexCodes,
+	value: number
+}
 
-export interface BaseProps {
-	randomizedArray: number[],
-	setRandomizedArray(newArray: number[]): void,
-	visualizationSpeed: number,
-	setColoursArray(newArray: ColourOptions[]): void
+export enum ColorHexCodes {
+	default = '#00FFF4', // default
+	active = '#C02B18',	// active
+	pivot = '#FFFF00', // pivot
+	swapped = '#18C061' // swapped
+}
+
+export enum Algorithms {
+	'Bubble Sort',
+	'Insertion Sort',
+	'Selection Sort',
+	'QuickSort (L)',
+	'QuickSort (LR)',
+	'Merge Sort',
+	'Inplace Merge Sort'
 }
