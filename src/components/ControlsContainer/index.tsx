@@ -7,7 +7,7 @@ import {
 	useStatusActions,
 	useStatusState
 } from '../../contexts';
-import useAlgorithms from '../../hooks/useAlgoritms';
+import { useAlgorithms, useAlgorithmsAsync } from '../../hooks';
 import Options from './Options';
 import Controls from './Controls';
 
@@ -24,30 +24,68 @@ const useStyles = makeStyles((theme) => ({
 
 const ControlsContainer = () => {
 	const classes = useStyles();
+	const { sortArrayAsync } = useAlgorithmsAsync();
 	const { sortArray } = useAlgorithms();
-	const { changeArraySize } = useArrayActions();
+	const { changeArraySize, getPreviousArray, getNextArray } = useArrayActions();
 	const { step, length } = useArrayState();
-	const { newGame, setCurrentAlgorithm, play, pause, setVisualizationSpeed } = useStatusActions();
-	const { isPlaying, visualizationSpeed } = useStatusState();
+	const {
+		restart,
+		setCurrentAlgorithm,
+		play,
+		pause,
+		setVisualizationSpeed,
+		toggleDetailMode
+	} = useStatusActions();
+	const { isPlaying, visualizationSpeed, isDetailMode, currentAlgorithm } = useStatusState();
+
+	const handlePlayClick = () => {
+		if (isPlaying && isDetailMode) {
+			console.log('1');
+			pause();
+		} else if (!isPlaying && isDetailMode) {
+			console.log('2');
+			play();
+		} else {
+			console.log('3');
+			play();
+			sortArrayAsync();
+		}
+	};
+
+	const handleDetailMode = () => {
+		toggleDetailMode();
+		if (isDetailMode) {
+			sortArray();
+		}
+	};
 
 	return (
 		<div className={classes.mainContainer}>
 			<Options
 				step={step}
-				newGame={newGame}
+				restart={restart}
 				setCurrentAlgorithm={setCurrentAlgorithm}
 				isPlaying={isPlaying}
 			/>
 			<Controls
 				isPlaying={isPlaying}
-				play={play}
-				pause={pause}
+				isDetailMode={isDetailMode}
 				visualizationSpeed={visualizationSpeed}
 				setVisualizationSpeed={setVisualizationSpeed}
 				changeArraySize={changeArraySize}
 				length={length}
+				getPreviousArray={getPreviousArray}
+				getNextArray={getNextArray}
+				handlePlayClick={handlePlayClick}
 			/>
-			<Button className={classes.mainContainer} onClick={() => sortArray()}>Sort</Button>
+			<Button onClick={() => handleDetailMode()}>Detail</Button>
+			<div>
+				{isDetailMode
+					? 'detail enabled'
+					: 'detail disabled'
+				}
+			</div>
+			<div>Current algorithim {currentAlgorithm}</div>
 		</div>
 	);
 };

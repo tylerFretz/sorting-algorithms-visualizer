@@ -47,22 +47,26 @@ const useStyles = makeStyles((theme) => ({
 
 interface Props {
 	isPlaying: boolean,
-	play: () => void,
-	pause: () => void,
+	isDetailMode: boolean,
 	visualizationSpeed: number,
 	setVisualizationSpeed: (speed: number) => void,
 	changeArraySize: (size: number) => void,
-	length: number
+	length: number,
+	getPreviousArray: () => void,
+	getNextArray: () => void,
+	handlePlayClick: () => void
 }
 
 const Controls = ({
 	isPlaying,
-	play,
-	pause,
+	isDetailMode,
 	visualizationSpeed,
 	setVisualizationSpeed,
 	changeArraySize,
-	length
+	length,
+	getPreviousArray,
+	getNextArray,
+	handlePlayClick
 }: Props) => {
 	const classes = useStyles();
 
@@ -81,7 +85,9 @@ const Controls = ({
 				<Slider
 					min={10}
 					max={1000}
+					defaultValue={960}
 					onChange={handleSpeedChange}
+					disabled={isPlaying}
 					aria-labelledby='visualization speed slider'
 					style={{
 						margin: '0% 5%'
@@ -101,7 +107,9 @@ const Controls = ({
 				<Slider
 					min={10}
 					max={100}
+					defaultValue={20}
 					onChange={handleArraySizeChange}
+					disabled={isPlaying}
 					aria-labelledby='visualization array size slider'
 					style={{
 						margin: '0% 5%'
@@ -119,21 +127,24 @@ const Controls = ({
 					<Button
 						variant='contained'
 						startIcon={<StepBackIcon />}
-						disabled={isPlaying}
+						disabled={isPlaying || !isDetailMode}
+						onClick={getPreviousArray}
 					/>
 				</div>
 				<div className={classes.buttonContainer}>
 					<Button
 						variant='contained'
 						startIcon={isPlaying ? <PauseIcon /> : <PlayIcon />}
-						onClick={isPlaying ? pause : play}
+						onClick={handlePlayClick}
+						disabled={(isPlaying && !isDetailMode) ?? true}
 					/>
 				</div>
 				<div className={classes.buttonContainer}>
 					<Button
 						variant='contained'
 						startIcon={<StepForwardIcon />}
-						disabled={isPlaying}
+						disabled={isPlaying || !isDetailMode}
+						onClick={getNextArray}
 					/>
 				</div>
 			</div>

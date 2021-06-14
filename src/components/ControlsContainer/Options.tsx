@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
@@ -19,14 +20,12 @@ const useStyles = makeStyles((theme) => ({
 	optionsContainer: {
 		display: 'flex',
 		padding: '10% 5%',
-		[theme.breakpoints.down('sm')]: {
-			flexDirection: 'column'
-		}
+		flexDirection: 'column'
 	},
 	randomizeButton: {
 		backgroundColor: '#000',
 		color: '#FFF',
-		marginRight: '5%',
+		marginBottom: '15%',
 		[theme.breakpoints.down('sm')]: {
 			marginBottom: '10%'
 		}
@@ -35,14 +34,14 @@ const useStyles = makeStyles((theme) => ({
 
 interface Props {
 	step: number,
-	newGame: () => void,
+	restart: () => void,
 	setCurrentAlgorithm: (a: number) => void,
 	isPlaying: boolean
 }
 
 const Options = ({
 	step,
-	newGame,
+	restart,
 	setCurrentAlgorithm,
 	isPlaying
 }: Props) => {
@@ -51,7 +50,7 @@ const Options = ({
 	const handleAlgorithimChange = (event: React.ChangeEvent<{ value: unknown }>) =>
 		setCurrentAlgorithm(Number(event.target.value));
 
-	const handleShuffle = (event: React.MouseEvent<HTMLElement>) => newGame();
+	const handleShuffle = (event: React.MouseEvent<HTMLElement>) => restart();
 
 	return (
 		<Container className={classes.mainContainer}>
@@ -60,13 +59,21 @@ const Options = ({
 				<Typography variant="h5" style={{ fontSize: '1.5rem' }}>{step} steps</Typography>
 			</div>
 			<div className={classes.optionsContainer}>
-				<Button variant="contained" className={classes.randomizeButton} onClick={handleShuffle}>
+				<Button
+					variant="contained"
+					className={classes.randomizeButton}
+					onClick={handleShuffle}
+					disabled={isPlaying}
+				>
 					Randomize
 				</Button>
+				<InputLabel id='algorithm-select-label'>Algorithm</InputLabel>
 				<Select
 					onChange={handleAlgorithimChange}
 					defaultValue={0}
-
+					disabled={isPlaying}
+					labelId='algorithm-select-label'
+					variant='outlined'
 				>
 					<MenuItem value={0}>Bubble Sort</MenuItem>
 					<MenuItem value={1}>Selection Sort</MenuItem>

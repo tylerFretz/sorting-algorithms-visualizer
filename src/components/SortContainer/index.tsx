@@ -4,7 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import LoadingModal from '../LoadingModal';
 import Bar from './Bar';
-import { useArrayState, useStatusState } from '../../contexts';
+import {
+	useArrayState,
+	useStatusState,
+} from '../../contexts';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -60,32 +63,36 @@ const SortContainer: React.FC = () => {
 		setWidth((sortContainerDimensions.width * 0.75) / length);
 	}, [length, sortContainerDimensions.width]);
 
-	if (isDetailMode && !isReady) return <LoadingModal />;
 
-	return (
-		<Container id="sortContainer" className={classes.mainContainer}>
-			{currentArray.map((bar) => (
-				<div
-					key={uuid()}
-					style={{
-						height: '100%',
-						display: 'flex',
-						alignItems: 'flex-end',
-						width: `${width}%`
-					}}
-				>
-					<Bar
-						colorCode={bar.colorCode}
-						value={bar.value}
-						height={(bar.value / length) * (sortContainerDimensions.height - 50)}
-						width={width}
-						margin="auto 10% 0 10%"
-						hideVal={hideValues}
-					/>
-				</div>
-			))}
-		</Container>
-	);
+	return (isDetailMode && !isReady)
+		? (
+			<Container id="sortContainer" className={classes.mainContainer}>
+				<LoadingModal />
+			</Container>
+		) : (
+			<Container id="sortContainer" className={classes.mainContainer}>
+				{currentArray.map((bar) => (
+					<div
+						key={uuid()}
+						style={{
+							height: '100%',
+							display: 'flex',
+							alignItems: 'flex-end',
+							width: `${width}%`
+						}}
+					>
+						<Bar
+							colorCode={bar.colorCode}
+							value={bar.value}
+							height={(bar.value / length) * (sortContainerDimensions.height - 50)}
+							width={width}
+							margin="auto 10% 0 10%"
+							hideVal={hideValues}
+						/>
+					</div>
+				))}
+			</Container>
+		);
 };
 
 export default SortContainer;
