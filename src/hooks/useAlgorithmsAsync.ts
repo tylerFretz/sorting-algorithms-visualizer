@@ -1,7 +1,8 @@
 import {
 	bubbleSortAsync,
 	selectionSortAsync,
-	insertionSortAsync
+	insertionSortAsync,
+	mergeSortAsync
 } from '../algorithms';
 import {
 	useStatusState,
@@ -39,6 +40,15 @@ const useAlgorithmsAsync = () => {
 				});
 			case Algorithms['Insertion Sort']:
 				return insertionSortAsync({
+					visualizationSpeed,
+					currentArray,
+					incrementStep,
+					setCurrentArray,
+					finish,
+					setAllColors
+				});
+			case Algorithms['Merge Sort']:
+				return mergeSortAsync({
 					visualizationSpeed,
 					currentArray,
 					incrementStep,

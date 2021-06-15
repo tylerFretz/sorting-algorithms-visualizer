@@ -14,21 +14,22 @@ const insertionSortAsync = async ({
 	let i; let j; let key;
 	for (i = 1; i < length; i++) {
 		key = currentArray[i];
-		key.colorCode = ColorHexCodes.active;
 		j = i - 1;
 
 		/* Move elements of arr[0..i-1], that are 
 		greater than key, to one position ahead 
 		of their current position */
 		while (j >= 0 && currentArray[j].value > key.value) {
-			currentArray[j].colorCode = ColorHexCodes.active;
+			currentArray[j].colorCode = ColorHexCodes.pivot;
+			currentArray[j + 1].colorCode = ColorHexCodes.pivot;
+
 			currentArray[j + 1] = currentArray[j];
-			currentArray[i].colorCode = ColorHexCodes.pivot;
 			j -= 1;
 
 			setCurrentArray(currentArray);
 			incrementStep();
 			await asyncSetTimeout(visualizationSpeed);
+			setAllColors(ColorHexCodes.default);
 		}
 		currentArray[j + 1] = key;
 

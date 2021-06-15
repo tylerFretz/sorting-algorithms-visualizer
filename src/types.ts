@@ -6,17 +6,16 @@ export interface Bar {
 export enum ColorHexCodes {
 	default = '#00FFF4',
 	active = '#C02B18',
-	pivot = '#FFFF00'
+	pivot = '#b2f387',
+	anchor = '#FFFF00'
 }
 
 export enum Algorithms {
 	'Bubble Sort',
 	'Selection Sort',
 	'Insertion Sort',
-	'QuickSort (L)',
-	'QuickSort (LR)',
 	'Merge Sort',
-	'Inplace Merge Sort'
+	'QuickSort'
 }
 
 export interface AlgorithmProps {

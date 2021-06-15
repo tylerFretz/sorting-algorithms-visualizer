@@ -1,2 +1,2 @@
-export { default as useAlgorithms } from './useAlgoritms';
-export { default as useAlgorithmsAsync } from './useAlgotithmsAsync';
+export { default as useAlgorithms } from './useAlgorithms';
+export { default as useAlgorithmsAsync } from './useAlgorithmsAsync';

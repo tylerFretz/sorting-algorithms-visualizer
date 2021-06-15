@@ -16,7 +16,6 @@ const selectionSortAsync = async ({
 	// One by one move boundary of unsorted subarray
 	for (i = 0; i < length - 1; i++) {
 		minIndex = i;
-		currentArray[minIndex].colorCode = ColorHexCodes.pivot;
 
 		// Find the minimum element in unsorted array
 		for (j = i + 1; j < length; j++) {
@@ -24,15 +23,20 @@ const selectionSortAsync = async ({
 				minIndex = j;
 			}
 
-			setAllColors(ColorHexCodes.default);
 			currentArray[j].colorCode = ColorHexCodes.active;
 			currentArray[minIndex].colorCode = ColorHexCodes.pivot;
+			currentArray[i].colorCode = ColorHexCodes.anchor;
+
 			setCurrentArray(currentArray);
 			incrementStep();
 			await asyncSetTimeout(visualizationSpeed);
+
+			currentArray[minIndex].colorCode = ColorHexCodes.default;
+			currentArray[j].colorCode = ColorHexCodes.default;
 		}
 
 		// Swap the found minimum element with the first element
+		currentArray[minIndex].colorCode = ColorHexCodes.pivot;
 		const temp = currentArray[i];
 		currentArray[i] = currentArray[minIndex];
 		currentArray[minIndex] = temp;
