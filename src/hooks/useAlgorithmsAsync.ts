@@ -17,7 +17,7 @@ import { Algorithms } from '../types';
 const useAlgorithmsAsync = () => {
 	const { currentArray } = useArrayState();
 	const { incrementStep, setCurrentArray, setAllColors } = useArrayActions();
-	const { visualizationSpeed, currentAlgorithm } = useStatusState();
+	const { status, visualizationSpeed, currentAlgorithm } = useStatusState();
 	const { finish } = useStatusActions();
 
 	const sortArrayAsync = () => {
@@ -29,7 +29,8 @@ const useAlgorithmsAsync = () => {
 					incrementStep,
 					setCurrentArray,
 					finish,
-					setAllColors
+					setAllColors,
+					status
 				});
 			case Algorithms['Selection Sort']:
 				return selectionSortAsync({
@@ -38,7 +39,8 @@ const useAlgorithmsAsync = () => {
 					incrementStep,
 					setCurrentArray,
 					finish,
-					setAllColors
+					setAllColors,
+					status
 				});
 			case Algorithms['Insertion Sort']:
 				return insertionSortAsync({
@@ -47,7 +49,8 @@ const useAlgorithmsAsync = () => {
 					incrementStep,
 					setCurrentArray,
 					finish,
-					setAllColors
+					setAllColors,
+					status
 				});
 			case Algorithms['Merge Sort']:
 				return mergeSortAsync({
@@ -56,7 +59,8 @@ const useAlgorithmsAsync = () => {
 					incrementStep,
 					setCurrentArray,
 					finish,
-					setAllColors
+					setAllColors,
+					status
 				});
 			case Algorithms['Quick Sort']:
 				return quickSortAsync({
@@ -65,7 +69,8 @@ const useAlgorithmsAsync = () => {
 					incrementStep,
 					setCurrentArray,
 					finish,
-					setAllColors
+					setAllColors,
+					status
 				});
 			case Algorithms['Bogo Sort']:
 				return bogoSortAsync({
@@ -74,7 +79,8 @@ const useAlgorithmsAsync = () => {
 					incrementStep,
 					setCurrentArray,
 					finish,
-					setAllColors
+					setAllColors,
+					status
 				});
 			default:
 				return null;

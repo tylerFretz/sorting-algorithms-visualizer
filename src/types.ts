@@ -1,4 +1,5 @@
 export interface Bar {
+	id: string,
 	colorCode: ColorHexCodes,
 	value: number
 }
@@ -25,5 +26,6 @@ export interface AlgorithmProps {
 	incrementStep: () => void,
 	setCurrentArray: (array: Bar[]) => void,
 	finish: () => void,
-	setAllColors: (color: ColorHexCodes) => void
+	setAllColors: (color: ColorHexCodes) => void,
+	status: string
 }

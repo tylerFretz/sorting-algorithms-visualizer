@@ -20,8 +20,8 @@ const insertionSortAsync = async ({
 		greater than key, to one position ahead 
 		of their current position */
 		while (j >= 0 && currentArray[j].value > key.value) {
-			currentArray[j].colorCode = ColorHexCodes.pivot;
-			currentArray[j + 1].colorCode = ColorHexCodes.pivot;
+			currentArray[j].colorCode = ColorHexCodes.active;
+			currentArray[j + 1].colorCode = ColorHexCodes.active;
 
 			currentArray[j + 1] = currentArray[j];
 			j -= 1;

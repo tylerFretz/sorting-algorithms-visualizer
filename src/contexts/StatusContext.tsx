@@ -41,24 +41,24 @@ const StatusProvider: React.FC = ({ children }) => {
 	const restart = () => {
 		reset();
 		setStatus('finished');
-		console.log('restart pressed');
+		console.log(`status set to: ${status}`);
 	};
 
 	const play = () => {
 		if (isFinished) restart();
 		setStatus('playing');
-		console.log('play pressed');
+		console.log(`status set to: ${status}`);
 	};
 
 	const pause = () => {
 		setStatus('paused');
-		console.log('pause pressed');
+		console.log(`status set to: ${status}`);
 	};
 
 	const finish = () => {
 		setStatus('finished');
 		setAllColors(ColorHexCodes.default);
-		console.log('finished');
+		console.log(`status set to: ${status}`);
 	};
 
 	const toggleDetailMode = () => {

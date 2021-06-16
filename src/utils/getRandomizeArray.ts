@@ -1,3 +1,4 @@
+import { v4 as uuid } from 'uuid';
 import { Bar, ColorHexCodes } from '../types';
 
 const getRandomizedArray = (arraySize: number): Bar[] => {
@@ -5,6 +6,7 @@ const getRandomizedArray = (arraySize: number): Bar[] => {
 
 	for (let i = 0; i < arraySize; i++) {
 		randomizedArray.push({
+			id: uuid(),
 			colorCode: ColorHexCodes.default,
 			value: Math.floor(Math.random() * arraySize + 1)
 		});

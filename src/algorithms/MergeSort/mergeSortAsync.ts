@@ -19,12 +19,10 @@ const mergeSortAsync = async ({
 
 		for (let i = 0; i < n1; i++) {
 			L[i] = currentArray[left + i];
-			L[i].colorCode = ColorHexCodes.anchor;
 		}
 
 		for (let j = 0; j < n2; j++) {
 			R[j] = currentArray[mid + 1 + j];
-			R[j].colorCode = ColorHexCodes.active;
 		}
 
 		let i = 0;
@@ -39,34 +37,34 @@ const mergeSortAsync = async ({
 				currentArray[k] = R[j];
 				j += 1;
 			}
-			currentArray[k].colorCode = ColorHexCodes.default;
-			k += 1;
-
+			currentArray[k].colorCode = ColorHexCodes.active;
 			setCurrentArray(currentArray);
 			incrementStep();
 			await asyncSetTimeout(visualizationSpeed);
+			currentArray[k].colorCode = ColorHexCodes.default;
+			k += 1;
 		}
 
 		while (i < n1) {
 			currentArray[k] = L[i];
-			currentArray[k].colorCode = ColorHexCodes.default;
+			currentArray[k].colorCode = ColorHexCodes.active;
 			i += 1;
-			k += 1;
-
 			setCurrentArray(currentArray);
 			incrementStep();
 			await asyncSetTimeout(visualizationSpeed);
+			currentArray[k].colorCode = ColorHexCodes.default;
+			k += 1;
 		}
 
 		while (j < n2) {
 			currentArray[k] = R[j];
-			currentArray[k].colorCode = ColorHexCodes.default;
+			currentArray[k].colorCode = ColorHexCodes.active;
 			j += 1;
-			k += 1;
-
 			setCurrentArray(currentArray);
 			incrementStep();
 			await asyncSetTimeout(visualizationSpeed);
+			currentArray[k].colorCode = ColorHexCodes.default;
+			k += 1;
 		}
 	};
 

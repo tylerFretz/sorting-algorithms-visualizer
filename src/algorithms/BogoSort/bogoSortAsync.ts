@@ -25,18 +25,17 @@ const bogoSortAsync = async ({
 			await asyncSetTimeout(visualizationSpeed);
 
 			if (currentArray[i].value < currentArray[i - 1].value)
-				setAllColors(ColorHexCodes.active);
-			return false;
+				return false;
 		}
-		setAllColors(ColorHexCodes.pivot);
 		return true;
 	};
 
 	const bogoSort = async () => {
 		while (! await isSorted()) {
+			setAllColors(ColorHexCodes.active);
 			shuffle();
-			setAllColors(ColorHexCodes.default);
 		}
+		setAllColors(ColorHexCodes.pivot);
 	};
 
 	await bogoSort();
