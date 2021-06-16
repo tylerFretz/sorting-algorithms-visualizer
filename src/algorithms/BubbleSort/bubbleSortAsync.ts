@@ -20,16 +20,12 @@ const bubbleSortAsync = async ({
 				const temp = currentArray[j];
 				currentArray[j] = currentArray[j + 1];
 				currentArray[j + 1] = temp;
-
-				setCurrentArray(currentArray);
-				await asyncSetTimeout(visualizationSpeed);
-				currentArray[j].colorCode = ColorHexCodes.default;
 			}
 
 			setCurrentArray(currentArray);
 			incrementStep();
 			await asyncSetTimeout(visualizationSpeed);
-			setAllColors(ColorHexCodes.default);
+			currentArray[j].colorCode = ColorHexCodes.default;
 		}
 	}
 	finish();
