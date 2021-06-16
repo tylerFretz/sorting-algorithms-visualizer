@@ -74,11 +74,12 @@ const ArrayProvider: React.FC = ({ children }) => {
 	const incrementStep = () => setStep((prev) => prev + 1);
 
 	const setAllColors = (color: ColorHexCodes) => {
-		const updatedArray = currentArray.map((bar) => {
+		const temp = currentArray.concat();
+		temp.forEach((bar) => {
 			bar.colorCode = color;
 			return bar;
 		});
-		setCurrentArray(updatedArray);
+		setCurrentArray(temp);
 	};
 
 	return (
