@@ -15,7 +15,8 @@ export enum Algorithms {
 	'Selection Sort',
 	'Insertion Sort',
 	'Merge Sort',
-	'QuickSort'
+	'Quick Sort',
+	'Bogo Sort'
 }
 
 export interface AlgorithmProps {

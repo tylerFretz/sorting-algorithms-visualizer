@@ -7,3 +7,6 @@ export { default as insertionSortAsync } from './InsertionSort/insertionSortAsyn
 
 export { default as mergeSortAsync } from './MergeSort/mergeSortAsync';
 
+export { default as quickSortAsync } from './QuickSort/quickSortAsync';
+
+export { default as bogoSortAsync } from './BogoSort/bogoSortAsync';

@@ -80,6 +80,7 @@ const Options = ({
 					<MenuItem value={2}>Insertion Sort</MenuItem>
 					<MenuItem value={3}>Merge Sort</MenuItem>
 					<MenuItem value={4}>Quick Sort</MenuItem>
+					<MenuItem value={5}>Bogo Sort</MenuItem>
 				</Select>
 
 			</div>

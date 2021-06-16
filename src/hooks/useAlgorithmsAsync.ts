@@ -2,7 +2,9 @@ import {
 	bubbleSortAsync,
 	selectionSortAsync,
 	insertionSortAsync,
-	mergeSortAsync
+	mergeSortAsync,
+	quickSortAsync,
+	bogoSortAsync
 } from '../algorithms';
 import {
 	useStatusState,
@@ -49,6 +51,24 @@ const useAlgorithmsAsync = () => {
 				});
 			case Algorithms['Merge Sort']:
 				return mergeSortAsync({
+					visualizationSpeed,
+					currentArray,
+					incrementStep,
+					setCurrentArray,
+					finish,
+					setAllColors
+				});
+			case Algorithms['Quick Sort']:
+				return quickSortAsync({
+					visualizationSpeed,
+					currentArray,
+					incrementStep,
+					setCurrentArray,
+					finish,
+					setAllColors
+				});
+			case Algorithms['Bogo Sort']:
+				return bogoSortAsync({
 					visualizationSpeed,
 					currentArray,
 					incrementStep,
