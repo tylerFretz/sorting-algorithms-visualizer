@@ -4,16 +4,16 @@ import CssBaseLine from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import ContextProvider from './ContextProvider';
+import { reducer, StateProvider } from './state';
 import theme from './theme';
 
 ReactDOM.render(
 	<React.StrictMode>
 		<ThemeProvider theme={theme}>
-			<ContextProvider>
-				<CssBaseLine />
+			<CssBaseLine />
+			<StateProvider reducer={reducer}>
 				<App />
-			</ContextProvider>
+			</StateProvider>
 		</ThemeProvider>
 	</React.StrictMode>,
 	document.getElementById('root')

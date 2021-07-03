@@ -6,6 +6,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import { useStateValue, reset, setCurrentAlgorithm } from '../../state';
+import { Status } from '../../types';
 
 const useStyles = makeStyles((theme) => ({
 	mainContainer: {
@@ -19,8 +21,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 	optionsContainer: {
 		display: 'flex',
-		padding: '10% 5%',
-		flexDirection: 'column'
+		padding: '2% 5%',
+		flexDirection: 'column',
+		minWidth: '50%'
 	},
 	randomizeButton: {
 		backgroundColor: '#000',
@@ -32,38 +35,28 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-interface Props {
-	step: number,
-	restart: () => void,
-	setCurrentAlgorithm: (a: number) => void,
-	isPlaying: boolean
-}
 
-const Options = ({
-	step,
-	restart,
-	setCurrentAlgorithm,
-	isPlaying
-}: Props) => {
+const Options = () => {
 	const classes = useStyles();
+	const [{ status, currentStep }, dispatch] = useStateValue();
 
 	const handleAlgorithimChange = (event: React.ChangeEvent<{ value: unknown }>) =>
-		setCurrentAlgorithm(Number(event.target.value));
+		dispatch(setCurrentAlgorithm(Number(event.target.value)));
 
-	const handleShuffle = (event: React.MouseEvent<HTMLElement>) => restart();
+	const handleShuffle = (event: React.MouseEvent<HTMLElement>) => dispatch(reset());
 
 	return (
 		<Container className={classes.mainContainer}>
 			<div className={classes.titleContainer}>
 				<Typography variant="h1" style={{ fontSize: '2rem', fontWeight: 800 }}>Sorting Visualizer</Typography>
-				<Typography variant="h5" style={{ fontSize: '1.5rem' }}>{step} steps</Typography>
+				<Typography variant="h5" style={{ fontSize: '1.5rem' }}>{currentStep} steps</Typography>
 			</div>
 			<div className={classes.optionsContainer}>
 				<Button
 					variant="contained"
 					className={classes.randomizeButton}
 					onClick={handleShuffle}
-					disabled={isPlaying}
+					disabled={status === Status.playing}
 				>
 					Randomize
 				</Button>
@@ -71,7 +64,7 @@ const Options = ({
 				<Select
 					onChange={handleAlgorithimChange}
 					defaultValue={0}
-					disabled={isPlaying}
+					disabled={status === Status.playing}
 					labelId='algorithm-select-label'
 					variant='outlined'
 				>
@@ -80,7 +73,6 @@ const Options = ({
 					<MenuItem value={2}>Insertion Sort</MenuItem>
 					<MenuItem value={3}>Merge Sort</MenuItem>
 					<MenuItem value={4}>Quick Sort</MenuItem>
-					<MenuItem value={5}>Bogo Sort</MenuItem>
 				</Select>
 
 			</div>

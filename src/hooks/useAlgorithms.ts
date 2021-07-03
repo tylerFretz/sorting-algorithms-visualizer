@@ -1,37 +1,47 @@
-import { bubbleSort } from '../algorithms';
+/* eslint-disable no-useless-return */
 import {
-	useStatusState,
-	useArrayState,
-	useArrayActions,
-	useStatusActions
-} from '../contexts';
-import { Algorithms } from '../types';
+	bubbleSort,
+	selectionSort,
+	insertionSort,
+	mergeSort,
+	quickSort
+} from '../algorithms';
+import { useStateValue, setStatus, setArrayList } from '../state';
+import { Algorithms, Bar, Status } from '../types';
 
 const useAlgorithms = () => {
-	const { currentArray, allArrays } = useArrayState();
-	const { setAllArrays, setCurrentArray } = useArrayActions();
-	const { currentAlgorithm } = useStatusState();
-	const { setReady, finish } = useStatusActions();
-
-	const handleFinishSort = () => {
-		setReady(true);
-		finish();
-		setCurrentArray(allArrays[0]);
-	};
+	const [{ currentAlgorithm, currentArray }, dispatch] = useStateValue();
 
 	const sortArray = () => {
-		setReady(false);
+		let newArray: Bar[][];
 		switch (currentAlgorithm) {
 			case Algorithms['Bubble Sort']:
-				return bubbleSort({
-					currentArray,
-					setCurrentArray,
-					setAllArrays,
-					handleFinishSort,
-					allArrays
-				});
+				newArray = bubbleSort(currentArray);
+				dispatch(setArrayList(newArray));
+				dispatch(setStatus(Status.ready));
+				return;
+			case Algorithms['Selection Sort']:
+				newArray = selectionSort(currentArray);
+				dispatch(setArrayList(newArray));
+				dispatch(setStatus(Status.ready));
+				return;
+			case Algorithms['Insertion Sort']:
+				newArray = insertionSort(currentArray);
+				dispatch(setArrayList(newArray));
+				dispatch(setStatus(Status.ready));
+				return;
+			case Algorithms['Merge Sort']:
+				newArray = mergeSort(currentArray);
+				dispatch(setArrayList(newArray));
+				dispatch(setStatus(Status.ready));
+				return;
+			case Algorithms['Quick Sort']:
+				newArray = quickSort(currentArray);
+				dispatch(setArrayList(newArray));
+				dispatch(setStatus(Status.ready));
+				return;
 			default:
-				return null;
+				return;
 		}
 	};
 

@@ -2,13 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import LoadingModal from '../LoadingModal';
 import Bar from './Bar';
-import {
-	useArrayState,
-	useStatusState,
-} from '../../contexts';
-
+import { useStateValue } from '../../state';
 
 const useStyles = makeStyles((theme) => ({
 	mainContainer: {
@@ -29,10 +24,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SortContainer: React.FC = () => {
-	const { currentArray, length } = useArrayState();
-	const { isDetailMode, isReady } = useStatusState();
+	const [{ currentArray, arraySize }] = useStateValue();
 	const classes = useStyles();
-	const hideValues = length > 20;
+	const hideValues = arraySize > 20;
 	const [width, setWidth] = useState(20);
 	const [sortContainerDimensions, setSortContainerDimensions] = useState({
 		width: 1000,
@@ -60,39 +54,34 @@ const SortContainer: React.FC = () => {
 	}, []);
 
 	useEffect(() => {
-		setWidth((sortContainerDimensions.width * 0.75) / length);
-	}, [length, sortContainerDimensions.width]);
+		setWidth((sortContainerDimensions.width * 0.75) / arraySize);
+	}, [arraySize, sortContainerDimensions.width]);
 
 
-	return (isDetailMode && !isReady)
-		? (
-			<Container id="sortContainer" className={classes.mainContainer}>
-				<LoadingModal />
-			</Container>
-		) : (
-			<Container id="sortContainer" className={classes.mainContainer}>
-				{currentArray.map((bar) => (
-					<div
-						key={uuid()}
-						style={{
-							height: '100%',
-							display: 'flex',
-							alignItems: 'flex-end',
-							width: `${width}%`
-						}}
-					>
-						<Bar
-							colorCode={bar.colorCode}
-							value={bar.value}
-							height={(bar.value / length) * (sortContainerDimensions.height - 50)}
-							width={width}
-							margin="auto 10% 0 10%"
-							hideVal={hideValues}
-						/>
-					</div>
-				))}
-			</Container>
-		);
+	return (
+		<Container id="sortContainer" className={classes.mainContainer}>
+			{currentArray.map((bar) => (
+				<div
+					key={uuid()}
+					style={{
+						height: '90%',
+						display: 'flex',
+						alignItems: 'flex-end',
+						width: `${width}%`
+					}}
+				>
+					<Bar
+						colorCode={bar.colorCode}
+						value={bar.value}
+						height={(bar.value / arraySize) * (sortContainerDimensions.height - 50)}
+						width={width}
+						margin="auto 10% 0 10%"
+						hideVal={hideValues}
+					/>
+				</div>
+			))}
+		</Container>
+	);
 };
 
 export default SortContainer;

@@ -12,14 +12,17 @@ import { ReactComponent as PlayIcon } from '../../assets/playIcon.svg';
 import { ReactComponent as PauseIcon } from '../../assets/pauseIcon.svg';
 import { ReactComponent as StepBackIcon } from '../../assets/stepBackIcon.svg';
 import { ReactComponent as StepForwardIcon } from '../../assets/stepForwardIcon.svg';
-
+import { useStateValue } from '../../state';
+import useVisualization from '../../hooks/useVisualiztion';
+import { Status, Algorithms } from '../../types';
 
 const useStyles = makeStyles((theme) => ({
 	mainContainer: {
 		display: 'flex',
 		flexDirection: 'column',
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
+		marginBottom: '20rem'
 	},
 	sliderContainer: {
 		display: 'flex',
@@ -45,36 +48,18 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-interface Props {
-	isPlaying: boolean,
-	isDetailMode: boolean,
-	visualizationSpeed: number,
-	setVisualizationSpeed: (speed: number) => void,
-	changeArraySize: (size: number) => void,
-	length: number,
-	getPreviousArray: () => void,
-	getNextArray: () => void,
-	handlePlayClick: () => void
-}
+const largeSorts = [Algorithms['Merge Sort'], Algorithms['Quick Sort']];
 
-const Controls = ({
-	isPlaying,
-	isDetailMode,
-	visualizationSpeed,
-	setVisualizationSpeed,
-	changeArraySize,
-	length,
-	getPreviousArray,
-	getNextArray,
-	handlePlayClick
-}: Props) => {
+const Controls = () => {
 	const classes = useStyles();
-
-	const handleSpeedChange = (event: unknown, newValue: unknown) =>
-		setVisualizationSpeed(1010 - Number(newValue));
-
-	const handleArraySizeChange = (event: unknown, newValue: unknown) =>
-		changeArraySize(Number(newValue));
+	const [{ status, arraySize, visualizationSpeed, currentAlgorithm }] = useStateValue();
+	const {
+		handlePlay,
+		handleSpeedChange,
+		handleArraySizeChange,
+		getPreviousArray,
+		getNextArray
+	} = useVisualization();
 
 	return (
 		<Container className={classes.mainContainer}>
@@ -84,10 +69,10 @@ const Controls = ({
 				</div>
 				<Slider
 					min={10}
-					max={1000}
+					max={1010}
 					defaultValue={960}
 					onChange={handleSpeedChange}
-					disabled={isPlaying}
+					disabled={status === Status.playing}
 					aria-labelledby='visualization speed slider'
 					style={{
 						margin: '0% 5%'
@@ -98,18 +83,19 @@ const Controls = ({
 				</div>
 			</Container>
 			<Typography variant='h4' style={{ fontSize: '1rem', fontWeight: 600 }}>
-				{Math.ceil(1000 / visualizationSpeed)} Operations / second
+				~ {Math.floor(1000 / visualizationSpeed)} Operations / second
 			</Typography>
 			<Container className={classes.sliderContainer}>
 				<div className={classes.iconContainer}>
 					<ChartSmallIcon />
 				</div>
 				<Slider
+					step={5}
 					min={10}
-					max={100}
+					max={largeSorts.includes(currentAlgorithm) ? 200 : 100}
 					defaultValue={20}
 					onChange={handleArraySizeChange}
-					disabled={isPlaying}
+					disabled={status === Status.playing}
 					aria-labelledby='visualization array size slider'
 					style={{
 						margin: '0% 5%'
@@ -120,30 +106,29 @@ const Controls = ({
 				</div>
 			</Container>
 			<Typography variant='h4' style={{ fontSize: '1rem', fontWeight: 600 }}>
-				{length} Elements
+				{arraySize} Elements
 			</Typography>
 			<div className={classes.controlsContainer}>
 				<div className={classes.buttonContainer}>
 					<Button
 						variant='contained'
 						startIcon={<StepBackIcon />}
-						disabled={isPlaying || !isDetailMode}
+						disabled={status === Status.playing}
 						onClick={getPreviousArray}
 					/>
 				</div>
 				<div className={classes.buttonContainer}>
 					<Button
 						variant='contained'
-						startIcon={isPlaying ? <PauseIcon /> : <PlayIcon />}
-						onClick={handlePlayClick}
-						disabled={(isPlaying && !isDetailMode) ?? true}
+						startIcon={status === Status.playing ? <PauseIcon /> : <PlayIcon />}
+						onClick={handlePlay}
 					/>
 				</div>
 				<div className={classes.buttonContainer}>
 					<Button
 						variant='contained'
 						startIcon={<StepForwardIcon />}
-						disabled={isPlaying || !isDetailMode}
+						disabled={status === Status.playing}
 						onClick={getNextArray}
 					/>
 				</div>
