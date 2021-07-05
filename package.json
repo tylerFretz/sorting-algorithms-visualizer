@@ -9,7 +9,7 @@
 		"start": "NODE_ENV=production node index.ts",
 		"start:prod": "cross-env NODE_ENV=production node index.ts",
 		"build:client": "cd client && npm run build",
-		"lint": "eslint --ext .js,.jsx,.ts,.tsx src --color",
+		"lint": "eslint --ext .js,.jsx,.ts,.tsx --color",
 		"lint:client": "cd client && npm run lint",
 		"lint:all": "npm run lint && npm run lint:client",
 		"format": "prettier --write src/**/*.{ts,tsx,scss,css,json}",
