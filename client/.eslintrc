@@ -5,7 +5,7 @@
 		"react"
 	],
 	"extends": [
-		"airbnb-typescript",
+		"airbnb-typescript/base",
 		"react-app",
 		"prettier"
 	],

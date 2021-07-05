@@ -1,16 +1,15 @@
 {
 	"plugins": [
 		"prettier",
-		"@typescript-eslint",
-		"react"
+		"@typescript-eslint"
 	],
 	"extends": [
-		"airbnb-typescript",
-		"react-app",
+		"airbnb-typescript/base",
 		"prettier"
 	],
 	"env": {
-		"browser": true,
+		"commonjs": true,
+		"node": true,
 		"es6": true
 	},
 	"rules": {
@@ -51,7 +50,6 @@
 				"allowForLoopAfterthoughts": true
 			}
 		],
-		"react/jsx-key": "error",
 		"import/no-extraneous-dependencies": [
 			"error",
 			{
@@ -64,15 +62,8 @@
 				]
 			}
 		],
-		"react/jsx-props-no-spreading": 0,
 		"import/prefer-default-export": 0,
 		"no-case-declarations": 0,
-		"react/prop-types": 0,
-		"react/jsx-boolean-value": 0,
-		"react/no-unescaped-entities": 0,
-		"react/jsx-one-expression-per-line": 0,
-		"react/jsx-wrap-multilines": 0,
-		"react/destucturing-assignment": 0,
 		"@typescript-eslint/comma-dangle": [
 			"warn",
 			{
@@ -92,10 +83,6 @@
 		]
 	},
 	"settings": {
-		"react": {
-			"pragma": "React",
-			"version": "detect"
-		},
 		"import/resolver": {
 			"typescript": {
 				"alwaysTryTypes": true
