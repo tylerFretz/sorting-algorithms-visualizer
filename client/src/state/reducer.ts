@@ -36,8 +36,10 @@ export const reducer = (state: State, action: Action): State => {
 		case 'SET_ARRAY_SIZE':
 			if (action.payload >= 10 && action.payload <= 200) {
 				return {
-					...state,
+					...initialState,
 					arraySize: action.payload,
+					currentAlgorithm: state.currentAlgorithm,
+					visualizationSpeed: state.visualizationSpeed,
 					currentArray: getRandomizedArray(action.payload)
 				};
 			}

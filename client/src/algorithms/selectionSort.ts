@@ -13,8 +13,6 @@ const selectionSort = (startArray: Bar[]) => {
 	let j: number;
 	let minIndex: number;
 
-	console.log(arrList);
-
 	// One by one move boundary of unsorted subarray
 	for (i = 0; i < length - 1; i++) {
 		minIndex = i;

@@ -5,7 +5,7 @@
 	"main": "index.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "ts-node-dev index.ts",
+		"dev": "ts-node index.ts",
 		"start": "NODE_ENV=production node index.ts",
 		"start:prod": "cross-env NODE_ENV=production node index.ts",
 		"build:client": "cd client && npm run build",

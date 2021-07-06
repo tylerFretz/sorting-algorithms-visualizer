@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import Options from './Options';

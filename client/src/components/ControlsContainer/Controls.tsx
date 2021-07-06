@@ -132,6 +132,12 @@ const Controls = () => {
 						onClick={getNextArray}
 					/>
 				</div>
+				<div className={classes.buttonContainer}>
+					<Button
+						variant='contained'
+						onClick={() => console.log(status)}
+					>status</Button>
+				</div>
 			</div>
 		</Container >
 	);

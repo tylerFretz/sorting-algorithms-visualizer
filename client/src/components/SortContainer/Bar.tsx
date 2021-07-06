@@ -24,15 +24,15 @@ const Bar: React.FC<BarProps> = ({
 		width,
 		margin,
 		backgroundColor: colorCode,
-		position: 'relative',
 		display: 'flex',
 		flexDirection: 'column',
 		justifyContent: 'flex-end',
 		alignItems: 'center',
-		zIndex: 1
+		zIndex: 1,
+		overflow: 'hidden'
 	}}>
 		{!hideVal && (
-			<span style={{ position: 'absolute', color: '#000' }}>
+			<span style={{ color: '#000' }}>
 				{value && value}
 			</span>
 		)}

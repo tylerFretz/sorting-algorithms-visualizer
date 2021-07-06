@@ -6,7 +6,6 @@ import { Bar, ColorHexCodes } from '../types';
 const mergeSort = (startArray: Bar[]) => {
 	let arrList: Bar[][] = [[...startArray]];
 	let tempArr = [...startArray];
-	console.log(tempArr);
 
 	const merge = (left: number, mid: number, right: number) => {
 		const n1 = mid - left + 1;
