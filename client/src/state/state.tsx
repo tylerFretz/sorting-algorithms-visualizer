@@ -11,7 +11,8 @@ export const initialState: State = {
 	currentArray: initialArray,
 	arrayList: [[]],
 	arraySize: 20,
-	currentStep: 0
+	currentStep: 0,
+	soundEnabled: false
 };
 
 export const StateContext = createContext<[State, React.Dispatch<Action>]>([

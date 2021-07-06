@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import useSound from 'use-sound';
 import {
 	useStateValue,
 	setArraySize,
@@ -11,14 +12,23 @@ import {
 import useAlgorithms from './useAlgorithms';
 import { Status } from '../types';
 
+import wave from '../assets/wave.wav';
+
 const useVisualization = () => {
-	const [{ currentStep, arrayList, status, visualizationSpeed, arraySize },
+	const [{ currentStep, arrayList, status, visualizationSpeed, arraySize, soundEnabled },
 		dispatch] = useStateValue();
 	const playRef = useRef<NodeJS.Timeout | number>(0);
 	const { sortArray } = useAlgorithms();
+	const [play] = useSound(wave, {
+		soundEnabled,
+		volume: 0.25,
+		playbackRate: 3
+	});
 
+	// listen for pause
 	useEffect(() => () => clearInterval(playRef.current as NodeJS.Timeout), [playRef]);
 
+	// when sorting is finished, stop the interval
 	useEffect(() => {
 		if (currentStep === arrayList.length - 1 && status === Status.playing) {
 			dispatch(setStatus(Status.finished));
@@ -27,7 +37,7 @@ const useVisualization = () => {
 		}
 	});
 
-	const play = () => {
+	const playVisualization = () => {
 		if (status === Status.finished) {
 			dispatch(reset());
 			sortArray();
@@ -36,6 +46,7 @@ const useVisualization = () => {
 			return;
 		}
 		playRef.current = setInterval(() => {
+			play();
 			dispatch(incrementStep());
 		}, visualizationSpeed);
 	};
@@ -53,7 +64,7 @@ const useVisualization = () => {
 			dispatch(reset());
 		} else {
 			dispatch(setStatus(Status.playing));
-			play();
+			playVisualization();
 		}
 	};
 

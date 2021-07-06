@@ -4,10 +4,14 @@ const theme = responsiveFontSizes(createMuiTheme());
 
 theme.props = {
 	MuiButtonBase: {
-		disableRipple: true
+		disableRipple: true,
 	},
 	MuiButton: {
 		disableElevation: true
+	},
+	MuiIconButton: {
+		disableRipple: true,
+		disableFocusRipple: true
 	}
 };
 

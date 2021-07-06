@@ -64,6 +64,10 @@ export type Action =
 	}
 	| {
 		type: 'RESET'
+	}
+	| {
+		type: 'SET_SOUND_ENABLED',
+		payload: boolean
 	};
 
 export type State = {
@@ -73,5 +77,6 @@ export type State = {
 	currentArray: Bar[],
 	arrayList: Bar[][],
 	arraySize: number,
-	currentStep: number
+	currentStep: number,
+	soundEnabled: boolean
 };

@@ -65,13 +65,18 @@ export const reducer = (state: State, action: Action): State => {
 				arraySize: state.arraySize,
 				currentArray: getRandomizedArray(state.arraySize)
 			};
-		case 'RESET': {
+		case 'RESET':
 			return {
 				...initialState,
 				currentAlgorithm: state.currentAlgorithm,
 				visualizationSpeed: state.visualizationSpeed,
 				arraySize: state.arraySize,
 				currentArray: getRandomizedArray(state.arraySize)
+			};
+		case 'SET_SOUND_ENABLED': {
+			return {
+				...state,
+				soundEnabled: action.payload
 			};
 		}
 		default:
@@ -96,3 +101,5 @@ export const setSpeed = (speed: number): Action => ({ type: 'SET_SPEED', payload
 export const setCurrentAlgorithm = (algorithm: Algorithms): Action => ({ type: 'SET_CURRENT_ALGORITHM', payload: algorithm });
 
 export const reset = (): Action => ({ type: 'RESET' });
+
+export const setSoundEnabled = (bool: boolean): Action => ({ type: 'SET_SOUND_ENABLED', payload: bool });
