@@ -1,6 +1,4 @@
 import { Action, Bar, Algorithms, Status, State } from '../types';
-// eslint-disable-next-line import/no-cycle
-import { initialState } from '.';
 import { getRandomizedArray } from '../utils';
 
 export const reducer = (state: State, action: Action): State => {
@@ -36,12 +34,11 @@ export const reducer = (state: State, action: Action): State => {
 		case 'SET_ARRAY_SIZE':
 			if (action.payload >= 10 && action.payload <= 200) {
 				return {
-					...initialState,
+					...state,
 					arraySize: action.payload,
-					currentAlgorithm: state.currentAlgorithm,
-					visualizationSpeed: state.visualizationSpeed,
+					arrayList: [[]],
 					currentArray: getRandomizedArray(action.payload),
-					soundEnabled: state.soundEnabled
+					currentStep: 0
 				};
 			}
 			return state;
@@ -60,20 +57,18 @@ export const reducer = (state: State, action: Action): State => {
 			return state;
 		case 'SET_CURRENT_ALGORITHM':
 			return {
-				...initialState,
+				...state,
 				currentAlgorithm: action.payload,
-				visualizationSpeed: state.visualizationSpeed,
-				arraySize: state.arraySize,
+				arrayList: [[]],
 				currentArray: getRandomizedArray(state.arraySize),
-				soundEnabled: state.soundEnabled
+				currentStep: 0
 			};
 		case 'RESET':
 			return {
-				...initialState,
-				currentAlgorithm: state.currentAlgorithm,
-				visualizationSpeed: state.visualizationSpeed,
-				arraySize: state.arraySize,
-				currentArray: getRandomizedArray(state.arraySize)
+				...state,
+				arrayList: [[]],
+				currentArray: getRandomizedArray(state.arraySize),
+				currentStep: 0
 			};
 		case 'SET_SOUND_ENABLED': {
 			return {

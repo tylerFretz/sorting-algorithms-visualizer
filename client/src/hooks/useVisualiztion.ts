@@ -22,7 +22,7 @@ const useVisualization = () => {
 	const [play] = useSound(wave, {
 		soundEnabled,
 		volume: 0.25,
-		playbackRate: 3
+		playbackRate: 1
 	});
 
 	// listen for pause

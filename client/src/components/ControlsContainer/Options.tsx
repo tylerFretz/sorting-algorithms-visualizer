@@ -65,11 +65,11 @@ const Options = () => {
 						Randomize
 					</Button>
 					{soundEnabled ? (
-						<IconButton aria-label='mute sound' onClick={handleSound}>
+						<IconButton aria-label='mute sound' onClick={handleSound} disabled={status === Status.playing}>
 							<VolumeUpIcon />
 						</IconButton>
 					) : (
-						<IconButton aria-label='enable sound' onClick={handleSound}>
+						<IconButton aria-label='enable sound' onClick={handleSound} disabled={status === Status.playing}>
 							<VolumeOffIcon />
 						</IconButton>
 					)}
