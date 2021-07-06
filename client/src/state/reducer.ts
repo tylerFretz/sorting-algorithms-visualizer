@@ -40,7 +40,8 @@ export const reducer = (state: State, action: Action): State => {
 					arraySize: action.payload,
 					currentAlgorithm: state.currentAlgorithm,
 					visualizationSpeed: state.visualizationSpeed,
-					currentArray: getRandomizedArray(action.payload)
+					currentArray: getRandomizedArray(action.payload),
+					soundEnabled: state.soundEnabled
 				};
 			}
 			return state;
@@ -63,7 +64,8 @@ export const reducer = (state: State, action: Action): State => {
 				currentAlgorithm: action.payload,
 				visualizationSpeed: state.visualizationSpeed,
 				arraySize: state.arraySize,
-				currentArray: getRandomizedArray(state.arraySize)
+				currentArray: getRandomizedArray(state.arraySize),
+				soundEnabled: state.soundEnabled
 			};
 		case 'RESET':
 			return {
