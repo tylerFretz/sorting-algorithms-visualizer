@@ -21,6 +21,7 @@ const useVisualization = () => {
 	const { sortArray } = useAlgorithms();
 	const [play] = useSound(wave, {
 		soundEnabled,
+		interupt: true,
 		volume: 0.25,
 		playbackRate: 1
 	});

@@ -60,8 +60,9 @@ export const reducer = (state: State, action: Action): State => {
 				...state,
 				currentAlgorithm: action.payload,
 				arrayList: [[]],
-				currentArray: getRandomizedArray(state.arraySize),
-				currentStep: 0
+				currentArray: getRandomizedArray(20),
+				currentStep: 0,
+				arraySize: 20
 			};
 		case 'RESET':
 			return {
