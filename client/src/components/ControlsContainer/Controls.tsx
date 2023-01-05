@@ -4,14 +4,14 @@ import Slider from '@material-ui/core/Slider';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import PauseIcon from '@material-ui/icons/Pause';
+import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
+import SkipNextIcon from '@material-ui/icons/SkipNext';
 import { ReactComponent as FastIcon } from '../../assets/fastIcon.svg';
 import { ReactComponent as SlowIcon } from '../../assets/slowIcon.svg';
 import { ReactComponent as ChartSmallIcon } from '../../assets/chartSmallIcon.svg';
 import { ReactComponent as ChartLargeIcon } from '../../assets/chartLargeIcon.svg';
-import { ReactComponent as PlayIcon } from '../../assets/playIcon.svg';
-import { ReactComponent as PauseIcon } from '../../assets/pauseIcon.svg';
-import { ReactComponent as StepBackIcon } from '../../assets/stepBackIcon.svg';
-import { ReactComponent as StepForwardIcon } from '../../assets/stepForwardIcon.svg';
 import { useStateValue } from '../../state';
 import useVisualization from '../../hooks/useVisualiztion';
 import { Status, Algorithms } from '../../types';
@@ -112,7 +112,7 @@ const Controls = () => {
 				<div className={classes.buttonContainer}>
 					<Button
 						variant='contained'
-						startIcon={<StepBackIcon />}
+						startIcon={<SkipPreviousIcon />}
 						disabled={status === Status.playing}
 						onClick={getPreviousArray}
 					/>
@@ -120,14 +120,14 @@ const Controls = () => {
 				<div className={classes.buttonContainer}>
 					<Button
 						variant='contained'
-						startIcon={status === Status.playing ? <PauseIcon /> : <PlayIcon />}
+						startIcon={status === Status.playing ? <PauseIcon /> : <PlayArrowIcon />}
 						onClick={handlePlay}
 					/>
 				</div>
 				<div className={classes.buttonContainer}>
 					<Button
 						variant='contained'
-						startIcon={<StepForwardIcon />}
+						startIcon={<SkipNextIcon />}
 						disabled={status === Status.playing}
 						onClick={getNextArray}
 					/>
